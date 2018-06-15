@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>DunderMifflinPetShop</title>
+    <title>Dunder Mifflin Pet Shop</title>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -9,6 +9,10 @@
   </head>
 
   <body>
+    <h1>Dunder Mifflin Pet Shop</h1>
+    <%= link_to "Create Employee", new_employee_path %><br>
+    <%= link_to "Create Dog", new_dog_path %><br>
+    <img src="http://www.franklincountydogs.com/adopt/assets/images/adoptable-size.jpg" alt="Pets"><br>
     <%= yield %>
   </body>
 </html>

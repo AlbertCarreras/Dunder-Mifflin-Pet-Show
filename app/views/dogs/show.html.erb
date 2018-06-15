@@ -10,3 +10,7 @@
   </li>
 
 </ul>
+
+<%= form_for @dog, method: :delete do |f| %>
+<%= f.submit "Delete" %>
+<% end %>

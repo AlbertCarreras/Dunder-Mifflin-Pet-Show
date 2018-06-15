@@ -1,4 +1,7 @@
 <h1>Edit</h1>
+
+<h2><%= flash[:notice] %> <%= @employee.errors.full_messages.join(', ') if @employee.errors.present? %></h2>
+
 <h2><%= @employee.full_name %></h2>
 <%= form_for @employee do |f| %>
 
@@ -14,7 +17,20 @@
 <%= f.label :img_url %>
 <%= f.text_field :img_url %><br><br>
 
+<h2>Existing Dog:</h2>
+<%= f.collection_select(:dog_id, @all_dogs, :id, :name, include_blank: 'Select') %><br><br>
+<h2>New Dog: </h2>
+  <%= f.fields_for :dog_attributes do |b| %>
+  <%= b.label :name %>
+  <%= b.text_field :name %><br><br>
+  <%= b.label :breed %>
+  <%= b.text_field :breed %><br><br>
+  <%= b.label :age %>
+  <%= b.text_field :age %><br><br>
+  <% end %>
 
-Dog: <%= f.collection_select(:dog_id, Dog.all, :id, :name) %>
 <%= f.submit "Save" %>
+<% end %>
+<%= form_for @employee, method: :delete do |f| %>
+<%= f.submit "Delete" %>
 <% end %>

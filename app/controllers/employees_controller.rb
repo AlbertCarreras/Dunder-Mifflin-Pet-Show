@@ -17,6 +17,8 @@ class EmployeesController < ApplicationController
     if @employee.update(employee_params)
       redirect_to @employee
     else
+      error_flash
+      @all_dogs = Dog.all
       render :edit
     end
   end
@@ -32,18 +34,28 @@ class EmployeesController < ApplicationController
       @employee.save
       redirect_to @employee
     else
+      error_flash
+      @all_dogs = Dog.all
       render :new
     end
   end
 
-  def find_employee
-    Employee.find(params[:id])
+  def destroy
+    find_employee.destroy
+    redirect_to employees_path
   end
 
 private
+def find_employee
+  Employee.find(params[:id])
+end
 
   def employee_params
-    params.require(:employee).permit(:first_name, :last_name, :title, :alias, :office, :img_url, :dog_id)
+    params.require(:employee).permit(:first_name, :last_name, :title, :alias, :office, :img_url, :dog_id, :dog_attributes => [:name, :breed, :age])
+  end
+
+  def error_flash
+    flash[:notice]="Your employee could not be updated:"
   end
 
 end
